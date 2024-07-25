@@ -1,0 +1,143 @@
+<div class="mt-4">
+    <div style="display: flex; justify-content: space-between">
+        <h3>Khoá học đã xoá</h3>
+        <a
+            style="color: blue; font-size: 16px; margin: 10px"
+            href="/me/stored/courses"
+            >Khoá học của tôi</a
+        >
+    </div>
+    <table class="table mt-4">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Hình ảnh</th>
+                <th scope="col">Tên khoá học</th>
+                <th scope="col">Mức độ</th>
+                <th scope="col">Thời gian tạo</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each courses}}
+            <tr>
+                <th scope="row">{{sum @index 1}}</th>
+                <td class="w-25">
+                    <img
+                        src="{{this.image}}"
+                        class="img-fluid img-thumbnail"
+                        alt="Sheep"
+                    />
+                </td>
+                <td>{{this.name}}</td>
+                <td>{{this.level}}</td>
+                <td>{{this.createdAt}}</td>
+                <td class="d-flex">
+                    <a
+                        style="padding-top: 0"
+                        href=""
+                        class="btn btn-link btn-restore"
+                        data-id="{{this._id}}"
+                    >
+                        <button class="btn btn-primary">Khôi phục</button>
+                    </a>
+                    <a style="padding-top: 0" href="#">
+                        <button
+                            class="btn btn-danger"
+                            data-toggle="modal"
+                            data-target="#deleteCourseModal"
+                            data-id="{{this._id}}"
+                        >
+                            Xoá vĩnh viễn
+                        </button>
+                    </a>
+                </td>
+            </tr>
+            {{else}}
+            <tr>
+                <td colspan="5" class="text-center">
+                    Thùng rác trống.
+                    <a href="/me/stored/courses">Quay lại danh sách khoá học</a>
+                </td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+</div>
+
+{{! Confirm delete }}
+<div class="modal" tabindex="-1" role="dialog" id="deleteCourseModal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Xác nhận xoá</h5>
+                <button
+                    type="button"
+                    class="close"
+                    data-dismiss="modal"
+                    aria-label="Close"
+                >
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>
+                    Hành động này không thể khôi phục nữa. Bạn chắc chắn muốn
+                    xoá chứ?
+                </p>
+            </div>
+            <div class="modal-footer">
+                <button
+                    type="button"
+                    class="btn btn-primary"
+                    data-dismiss="modal"
+                >
+                    Huỷ
+                </button>
+                <button
+                    id="btn-delete-course"
+                    type="button"
+                    class="btn btn-danger"
+                >
+                    Xoá khoá học vĩnh viễn
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+{{!-- Form hidden --}}
+<form name="delete-course-form" method="post"></form>
+<form name="restore-course-form" method="post"></form>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        var courseId;
+        var deleteForm = document.forms['delete-course-form'];
+        var restoreForm = document.forms['restore-course-form'];
+        var btnDeletePermanentCourse =
+            document.querySelector('#btn-delete-course');
+        var btnRestoreCourse = $('.btn-restore');
+
+        $('#deleteCourseModal').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget);
+            courseId = button.data('id');
+            console.log('courseId: ', courseId);
+        });
+
+        btnDeletePermanentCourse.onclick = () => {
+            deleteForm.action =
+                '/courses/' + courseId + '/deletePermanent?_method=DELETE';
+            deleteForm.submit();
+        };
+
+        // btnRestoreCourse is JQUERY, not querySelector
+        $(document).on('click', '.btn-restore', function (e) {
+            e.preventDefault();
+            courseId = $(this).data('id');
+            restoreForm.action =
+                '/courses/' + courseId + '/restore?_method=PATCH';
+            restoreForm.submit();
+        });
+    });
+</script>

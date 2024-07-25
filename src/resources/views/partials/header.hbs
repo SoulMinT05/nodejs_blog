@@ -1,25 +1,45 @@
 <nav class='navbar navbar-expand-lg navbar-dark bg-dark'>
-    <a class='navbar-brand' href='/'>F8 Online Courses</a>
-    <button
-        class='navbar-toggler'
-        type='button'
-        data-toggle='collapse'
-        data-target='#navbarSupportedContent'
-        aria-controls='navbarSupportedContent'
-        aria-expanded='false'
-        aria-label='Toggle navigation'
-    >
-        <span class='navbar-toggler-icon'></span>
-    </button>
+    <div class='container'>
+        <a class='navbar-brand' href='/'>F8 Online Courses</a>
+        <button
+            class='navbar-toggler'
+            type='button'
+            data-toggle='collapse'
+            data-target='#navbarSupportedContent'
+            aria-controls='navbarSupportedContent'
+            aria-expanded='false'
+            aria-label='Toggle navigation'
+        >
+            <span class='navbar-toggler-icon'></span>
+        </button>
 
-    <div class='collapse navbar-collapse' id='navbarSupportedContent'>
-        <ul class='navbar-nav mr-auto'>
-            <li class='nav-item active'>
-                <a class='nav-link' href='#'>Home <span class='sr-only'>(current)</span></a>
-            </li>
-            <li class='nav-item'>
-                <a class='nav-link' href='../courses/create'>Tạo khoá học</a>
-            </li>
-        </ul>
+        <div class='collapse navbar-collapse' id='navbarSupportedContent'>
+            <ul class='navbar-nav ml-auto'>
+                <li class='nav-item dropdown'>
+                    <a
+                        class='nav-link dropdown-toggle'
+                        href='#'
+                        role='button'
+                        data-toggle='dropdown'
+                        aria-expanded='false'
+                    >
+                        <img
+                            src='https://scontent.fsgn5-10.fna.fbcdn.net/v/t39.30808-1/358100004_2194791824244409_5084208550171765808_n.jpg?stp=dst-jpg_p480x480&_nc_cat=110&ccb=1-7&_nc_sid=0ecb9b&_nc_ohc=1Sg7el4oykoQ7kNvgGj8ZC6&_nc_ht=scontent.fsgn5-10.fna&oh=00_AYBZCbpiHwJP85vSlBmogNGyJpcWPge85ojHxFkKwG6f-g&oe=66A68CD3'
+                            alt=''
+                            style='width: 28px; height: 28px; border-radius: 50%; margin-right: 4px;'
+                        />
+                        Tâm Minh
+                    </a>
+                    <div class='dropdown-menu'>
+                        <a class='dropdown-item' href='../courses/create'>Tạo khoá học</a>
+                        <div class='dropdown-divider'></div>
+                        <a class='dropdown-item' href='/me/stored/courses'>Khoá học của tôi</a>
+                        <a class='dropdown-item' href='/me/stored/news'>Bài viết của tôi</a>
+                        <div class='dropdown-divider'></div>
+                        <a class='dropdown-item' href='#'>Đăng xuất</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
     </div>
 </nav>
