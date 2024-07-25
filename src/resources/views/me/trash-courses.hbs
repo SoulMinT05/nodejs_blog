@@ -14,7 +14,7 @@
                 <th scope="col">Hình ảnh</th>
                 <th scope="col">Tên khoá học</th>
                 <th scope="col">Mức độ</th>
-                <th scope="col">Thời gian tạo</th>
+                <th scope="col">Thời gian xoá</th>
                 <th scope="col"></th>
             </tr>
         </thead>
@@ -31,7 +31,7 @@
                 </td>
                 <td>{{this.name}}</td>
                 <td>{{this.level}}</td>
-                <td>{{this.createdAt}}</td>
+                <td>{{this.deletedAt}}</td>
                 <td class="d-flex">
                     <a
                         style="padding-top: 0"
@@ -122,7 +122,6 @@
         $('#deleteCourseModal').on('show.bs.modal', function (event) {
             var button = $(event.relatedTarget);
             courseId = button.data('id');
-            console.log('courseId: ', courseId);
         });
 
         btnDeletePermanentCourse.onclick = () => {
