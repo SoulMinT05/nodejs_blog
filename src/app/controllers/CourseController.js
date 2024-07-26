@@ -51,6 +51,19 @@ class CourseController {
             .then(() => res.redirect('back'))
             .catch(next);
     }
+    // POST / courses/handle-form-actions
+    handleFormActions(req, res, next) {
+        switch (req.body.action) {
+            case 'delete':
+                Course.delete({ _id: { $in: req.body.courseIds } })
+                    .then(() => res.redirect('back'))
+                    .catch(next);
+                break;
+            default:
+                console.log('Invalid action: ');
+                res.json('message: Hành động này không có sẵn');
+        }
+    }
     // DELETE / courses/:id
     delete(req, res, next) {
         Course.delete({ _id: req.params.id })
