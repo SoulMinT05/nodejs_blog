@@ -7,11 +7,11 @@
     <h3>Khoá học của tôi</h3>
     <div style="display: flex; justify-content: space-between">
         <a
-            style="padding-top: 0; padding-right: 0"
+            style="padding-top: 0; padding-right: 0; color: #28a745"
             href="/courses/create"
             class="btn btn-link"
         >
-            <button class="btn btn-success">Thêm khoá học</button>
+            Thêm khoá học
         </a>
         <a
             style="color: red; font-size: 16px; margin: 10px"
@@ -82,28 +82,33 @@
                 <td>{{this.createdAt}}</td>
                 <td class="d-flex">
                     <a
-                        style="padding-top: 0; padding-right: 0"
+                        style="
+                            padding-top: 0;
+                            padding-right: 0;
+                            color: #ffc107 !important;
+                        "
                         href="/courses/{{this.slug}}"
                         class="btn btn-link"
                     >
-                        <button class="btn btn-warning">Xem</button>
+                        {{!-- <button class="btn btn-warning">Xem</button> --}}
+                        Xem
                     </a>
                     <a
                         style="padding-top: 0"
                         href="/courses/{{this._id}}/edit"
                         class="btn btn-link"
                     >
-                        <button class="btn btn-primary">Sửa</button>
+                        {{!-- <button class="btn btn-primary">Sửa</button> --}}
+                        Sửa
                     </a>
-                    <a style="padding-top: 0" href="#">
-                        <button
-                            class="btn btn-danger"
-                            data-toggle="modal"
-                            data-target="#deleteCourseModal"
-                            data-id="{{this._id}}"
-                        >
-                            Xoá
-                        </button>
+                    <a
+                        href="#"
+                        style="padding-top: 4px; color: #dc3545"
+                        data-toggle="modal"
+                        data-target="#deleteCourseModal"
+                        data-id="{{this._id}}"
+                    >
+                        Xoá
                     </a>
                 </td>
             </tr>
@@ -163,14 +168,15 @@
 <script>
     document.addEventListener('DOMContentLoaded', () => {
         var courseId;
-        var containerForm = document.forms['container-form'];
+        //var containerForm = document.forms['container-form'];
+        var containerForm = $('form[name="container-form"]');
+        console.log(containerForm);
         var deleteForm = document.forms['delete-course-form'];
         var btnDeleteCourse = document.querySelector('#btn-delete-course');
         var checkboxAll = $('#checkbox-all');
         var courseItemCheckbox = $('input[name="courseIds[]"]');
         var checkSubmitBtn = $('.check-submit-btn');
 
-        console.log(containerForm);
         $('#deleteCourseModal').on('show.bs.modal', function (event) {
             var button = $(event.relatedTarget);
             courseId = button.data('id');

@@ -59,6 +59,16 @@ class CourseController {
                     .then(() => res.redirect('back'))
                     .catch(next);
                 break;
+            case 'restore':
+                Course.restore({ _id: { $in: req.body.courseIds } })
+                    .then(() => res.redirect('back'))
+                    .catch(err => console.error(err));
+                break;
+            case 'delete-permanent':
+                Course.deleteMany({ _id: { $in: req.body.courseIds } })
+                    .then(() => res.redirect('back'))
+                    .catch(err => console.error(err));
+                break;
             default:
                 console.log('Invalid action: ');
                 res.json('message: Hành động này không có sẵn');
