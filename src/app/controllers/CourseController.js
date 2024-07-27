@@ -7,8 +7,7 @@ class CourseController {
         Course.findOne({ slug: req.params.slug })
             .lean()
             .then(course => {
-                res.render('courses/show', {
-                    // course: mongooseToObject(course),
+                res.render('courses/courseDetail', {
                     course,
                 });
             })
@@ -41,6 +40,7 @@ class CourseController {
     }
     // PUT / courses/:id
     update(req, res, next) {
+        req.body.image = `https://img.youtube.com/vi/${req.body.videoId}/sddefault.jpg`;
         Course.updateOne({ _id: req.params.id }, req.body)
             .then(() => res.redirect('/me/stored/courses'))
             .catch(next);
