@@ -4,14 +4,21 @@ const { mongooseToObject } = require('../../utils/mongoose');
 class MeController {
     // GET /me/stored/courses
     async storedCourses(req, res, next) {
+        let courseQuery = Course.find({});
+
+        if (req.query.hasOwnProperty('_sort')) {
+            courseQuery = courseQuery.sort({
+                [req.query.column]: req.query.type,
+            });
+        }
+
         //Without Promise, two Course execute async approximately at the same time,
         //Course 1 has not output, Course 2 ran
-
         //Example: if promise 1 run 2s, promise 2 run 5s
         // If use 2 promise: promise 1 and promise 2 --> run total time: 7s
         // But if use Promise.all --> run total time: 5s
         Promise.all([
-            Course.find({}).lean(),
+            courseQuery.lean(),
             Course.countDocumentsWithDeleted({ deleted: true }),
         ])
             .then(([courses, deletedCount]) => {
