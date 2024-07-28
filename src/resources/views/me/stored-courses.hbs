@@ -56,7 +56,10 @@
                 <th scope="col">
                     Thời gian tạo {{{sortable 'createdAt' _sort}}}
                 </th>
-                <th scope="col"></th>
+                <th scope="col">
+                    Thời gian cập nhật {{{sortable 'updatedAt' _sort}}}
+                </th>
+                <th scope="col">Hành động</th>
             </tr>
         </thead>
         <tbody>
@@ -82,7 +85,8 @@
                 </td>
                 <td>{{this.name}}</td>
                 <td>{{this.level}}</td>
-                <td>{{this.createdAt}}</td>
+                <td>{{formatDate this.createdAt}}</td>
+                <td>{{formatDate this.updatedAt}}</td>
                 <td class="d-flex">
                     <a
                         style="

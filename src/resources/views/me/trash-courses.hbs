@@ -47,7 +47,7 @@
                 <th scope="col">Tên khoá học</th>
                 <th scope="col">Mức độ</th>
                 <th scope="col">Thời gian xoá</th>
-                <th scope="col"></th>
+                <th scope="col">Hành động</th>
             </tr>
         </thead>
         <tbody>
@@ -73,7 +73,7 @@
                 </td>
                 <td>{{this.name}}</td>
                 <td>{{this.level}}</td>
-                <td>{{this.deletedAt}}</td>
+                <td>{{formatDate this.deletedAt}}</td>
                 <td class="d-flex">
                     <a
                         style="padding-top: 0"
