@@ -49,7 +49,7 @@
         <thead>
             <tr>
                 <th scope="col">Chọn</th>
-                <th scope="col">STT</th>
+                <th scope="col">STT {{{sortable '_id' _sort}}}</th>
                 <th scope="col">Hình ảnh</th>
                 <th scope="col">Tên khoá học {{{sortable 'name' _sort}}}</th>
                 <th scope="col">Mức độ {{{sortable 'level' _sort}}}</th>
@@ -75,7 +75,7 @@
                         />
                     </div>
                 </td>
-                <th scope="row">{{sum @index 1}}</th>
+                <th scope="row">{{this._id}}</th>
                 <td class="w-25">
                     <img
                         src="{{this.image}}"
