@@ -32,6 +32,33 @@ class UserController {
             })
             .catch(next);
     }
+    // GET / user/create
+    create(req, res, next) {
+        res.render('users/create');
+    }
+    // POST / user/createStore
+    createStore(req, res, next) {
+        const salt = bcrypt.genSaltSync(10);
+        const userPassword = req.body.password || '123456';
+        const userConfirmPassword = userPassword;
+
+        const hash = bcrypt.hashSync(userPassword, salt);
+
+        const newUser = new User({
+            ...req.body,
+            password: hash,
+            confirmPassword: hash,
+        });
+
+        console.log('newUser: ', newUser);
+        newUser
+            .save()
+            .then(() => {
+                res.redirect('back');
+            })
+            .catch(next);
+    }
+
     // GET / user/login
     login(req, res, next) {
         res.render('users/login');
@@ -41,7 +68,6 @@ class UserController {
     async loginSuccessfully(req, res, next) {
         try {
             const user = await User.findOne({ email: req.body.email });
-            console.log('user.email', user.email);
             if (!user) {
                 res.status(404).json('Tên của bạn không có!');
             }
@@ -58,6 +84,19 @@ class UserController {
         } catch (err) {
             console.log('err: ', err);
         }
+    }
+
+    // GET / show/:slug
+    show(req, res, next) {
+        User.findOne({ slug: req.params.slug })
+            .lean()
+            .then(user => {
+                res.render('users/userDetail', {
+                    user,
+                });
+            })
+            .catch(next);
+        // res.send('DETIAL USER');
     }
 }
 module.exports = new UserController();

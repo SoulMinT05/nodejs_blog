@@ -1,4 +1,6 @@
 const Course = require('../models/Course');
+const User = require('../models/User');
+
 const { mongooseToObject } = require('../../utils/mongoose');
 
 class MeController {
@@ -49,6 +51,17 @@ class MeController {
                 });
             })
             .catch(err => console.log('err: ', err));
+    }
+    // get / user/geAllUsers
+    geAllUsers(req, res, next) {
+        User.find({})
+            .lean()
+            .then(users => {
+                res.render('me/stored-users', {
+                    users,
+                });
+            })
+            .catch(next);
     }
 }
 
