@@ -3,7 +3,7 @@ const express = require('express');
 const morgan = require('morgan');
 const methodOverride = require('method-override');
 const handlebars = require('express-handlebars');
-
+const bcrypt = require('bcrypt');
 const SortMiddleware = require('./app/middlewares/SortMiddleware');
 
 const moment = require('moment');

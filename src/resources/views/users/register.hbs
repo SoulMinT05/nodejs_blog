@@ -1,0 +1,49 @@
+<h3 class="mt-4">Đăng kí tài khoản</h3>
+
+<form method="post" action="/users/store" class="mt-4">
+    <div class="form-group">
+        <label for="name">Tên đăng nhập</label>
+        <input
+            type="text"
+            class="form-control"
+            id="name"
+            name="name"
+            required
+        />
+    </div>
+    <div class="form-group">
+        <label for="email">Email</label>
+        <input
+            type="text"
+            class="form-control"
+            id="email"
+            name="email"
+            required
+        />
+    </div>
+    <div class="form-group">
+        <label for="password">Mật khẩu</label>
+        <input
+            type="text"
+            class="form-control"
+            id="password"
+            name="password"
+            required
+        />
+    </div>
+    <div class="form-group">
+        <label for="confirmPassword">Nhập lại mật khẩu</label>
+        <input
+            type="text"
+            class="form-control"
+            id="confirmPassword"
+            name="confirmPassword"
+            required
+        />
+    </div>
+
+    <div class="d-flex justify-content-between align-items-center">
+        <button type="submit" class="btn btn-primary">Đăng kí</button>
+        <a href="/users/login">Đã có tài khoản? Đăng nhập ngay</a>
+    </div>
+</form>
