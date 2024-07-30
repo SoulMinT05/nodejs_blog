@@ -96,7 +96,19 @@ class UserController {
                 });
             })
             .catch(next);
-        // res.send('DETIAL USER');
+    }
+    // GET / users/:id/edit
+    edit(req, res, next) {
+        User.findById(req.params.id)
+            .lean()
+            .then(user => res.render('users/edit', { user }))
+            .catch(next);
+    }
+    // PUT / users/:id
+    update(req, res, next) {
+        User.updateOne({ _id: req.params.id }, req.body)
+            .then(() => res.redirect('/me/stored/users'))
+            .catch(next);
     }
 }
 module.exports = new UserController();
