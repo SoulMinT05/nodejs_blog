@@ -1,5 +1,5 @@
 const User = require('../models/User');
-
+const jwt = require('jsonwebtoken');
 const { mongooseToObject } = require('../../utils/mongoose');
 const bcrypt = require('bcrypt');
 
@@ -41,9 +41,9 @@ class UserController {
         const salt = bcrypt.genSaltSync(10);
         const userPassword = req.body.password || '123456';
         const userConfirmPassword = userPassword;
+        const isAdmin = req.body.isAdmin || false;
 
         const hash = bcrypt.hashSync(userPassword, salt);
-
         const newUser = new User({
             ...req.body,
             password: hash,

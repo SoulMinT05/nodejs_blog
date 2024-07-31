@@ -1,6 +1,9 @@
 <ul class="list-group mt-4">
     <li class="list-group-item">Tên: {{user.name}}</li>
     <li class="list-group-item">Email: {{user.email}}</li>
+    <li class="list-group-item">
+        Quyền: {{translateAdminBoolean user.isAdmin}}
+    </li>
     <li class="list-group-item">Ngày tạo: {{formatDate user.createdAt}}</li>
     <li class="list-group-item">
         Ngày cập nhật: {{formatDate user.updatedAt}}

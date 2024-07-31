@@ -41,8 +41,10 @@ module.exports = {
         if (month.length < 2) month = '0' + month;
         if (day.length < 2) day = '0' + day;
 
-        return (
-            `${[day, month, year].join('/')}` + ` ${hour}:${minute}:${seconds}`
-        );
+        return `${[day, month, year].join('/')}`;
+    },
+    translateAdminBoolean: admin => {
+        if (admin === true) return 'Quản lý';
+        if (admin === false) return 'Người dùng';
     },
 };
