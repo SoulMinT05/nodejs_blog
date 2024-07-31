@@ -110,5 +110,11 @@ class UserController {
             .then(() => res.redirect('/me/stored/users'))
             .catch(next);
     }
+    // DELETE / users/:id
+    delete(req, res, next) {
+        User.delete({ _id: req.params.id })
+            .then(() => res.redirect('back'))
+            .catch(next);
+    }
 }
 module.exports = new UserController();

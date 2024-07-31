@@ -9,6 +9,7 @@ router.post('/store', userController.store);
 router.post('/createStore', userController.createStore);
 router.get('/:id/edit', userController.edit);
 router.put('/:id', userController.update);
+router.delete('/:id', userController.delete);
 router.get('/login', userController.login);
 router.post('/loginSuccessfully', userController.loginSuccessfully);
 router.get('/:slug', userController.show);
