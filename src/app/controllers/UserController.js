@@ -2,6 +2,7 @@ const User = require('../models/User');
 const jwt = require('jsonwebtoken');
 const { mongooseToObject } = require('../../utils/mongoose');
 const bcrypt = require('bcrypt');
+require('dotenv').config();
 
 class UserController {
     // GET / user/register
@@ -68,6 +69,7 @@ class UserController {
     async loginSuccessfully(req, res, next) {
         try {
             const user = await User.findOne({ email: req.body.email });
+            console.log('user', user);
             if (!user) {
                 res.status(404).json('Tên của bạn không có!');
             }
@@ -79,7 +81,20 @@ class UserController {
                 res.status(404).json('Mật khẩu của bạn không đúng!');
             }
             if (user.email && isValidPassword) {
-                res.status(200).json('Bạn đã đăng nhập thành công!');
+                console.log('req.user: ', req.user);
+                const accessToken = jwt.sign(
+                    {
+                        _id: user._id,
+                        isAdmin: user.isAdmin,
+                    },
+                    process.env.ACCESS_TOKEN_SECRET,
+                    { expiresIn: '1d' },
+                );
+                const { password, confirmPassword, ...others } = user._doc;
+                res.status(200).json({
+                    others,
+                    accessToken,
+                });
             }
         } catch (err) {
             console.log('err: ', err);
@@ -112,8 +127,12 @@ class UserController {
     }
     // DELETE / users/:id
     delete(req, res, next) {
+        console.log('DELETEETEEEE');
         User.delete({ _id: req.params.id })
-            .then(() => res.redirect('back'))
+            .then(() => {
+                // res.redirect('back');
+                res.status(200).json('Xoá tài khoản người dùng thành công');
+            })
             .catch(next);
     }
 }

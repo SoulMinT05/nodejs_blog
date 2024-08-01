@@ -175,8 +175,8 @@
 <script>
     document.addEventListener('DOMContentLoaded', () => {
         var courseId;
-        var containerForm = document.forms['container-form'];
-        //var containerForm = $('form[name="container-form"]');
+        //var containerForm = document.forms['container-form'];
+        var containerForm = $('form[name="container-form"]');
         var deleteForm = document.forms['delete-course-form'];
         var btnDeleteCourse = document.querySelector('#btn-delete-course');
         var checkboxAll = $('#checkbox-all');
@@ -225,11 +225,10 @@
         function renderCheckAllSubmitBtn() {
             var checkedCount = $('input[name="courseIds[]"]:checked').length;
             if (checkedCount > 0) {
-                checkSubmitBtn.removeAttr('disabled');
+                checkSubmitBtn.attr('disabled', false);
             } else {
-                checkSubmitBtn.addAttr('disabled');
+                checkSubmitBtn.attr('disabled', true);
             }
-            console.log(checkedCount);
         }
     });
 </script>

@@ -4,6 +4,7 @@ const morgan = require('morgan');
 const methodOverride = require('method-override');
 const handlebars = require('express-handlebars');
 const bcrypt = require('bcrypt');
+const dotenv = require('dotenv');
 const SortMiddleware = require('./app/middlewares/SortMiddleware');
 
 const moment = require('moment');
@@ -23,6 +24,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 app.use(methodOverride('_method'));
+dotenv.config();
 
 // Custom middlewares
 app.use(SortMiddleware);
