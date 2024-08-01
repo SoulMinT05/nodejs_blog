@@ -19,6 +19,7 @@ router.delete(
 router.get('/refreshToken', userController.refreshToken);
 router.get('/login', userController.login);
 router.post('/loginSuccessfully', userController.loginSuccessfully);
+router.post('/logout', verifyMiddleware.verifyToken, userController.logout);
 router.get('/:slug', userController.show);
 
 module.exports = router;

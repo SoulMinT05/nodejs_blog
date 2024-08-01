@@ -69,7 +69,6 @@ class UserController {
     }
 
     // POST / user/loginSuccessfully
-
     async loginSuccessfully(req, res, next) {
         try {
             const user = await User.findOne({ email: req.body.email });
@@ -104,6 +103,14 @@ class UserController {
         } catch (err) {
             console.log('err: ', err);
         }
+    }
+    // POST / user/logout
+    async logout(req, res, next) {
+        res.clearCookie('refreshToken');
+        refreshTokens = refreshTokens.filter(
+            token => token !== req.cookies.refreshToken,
+        );
+        res.status(200).json('Đăng xuất thành công');
     }
 
     // POST / refreshToken
