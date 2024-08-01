@@ -12,10 +12,11 @@ router.get('/:id/edit', userController.edit);
 router.put('/:id', userController.update);
 router.delete(
     '/:id',
-    verifyMiddleware.verifyTokenOfAdmin,
+    // verifyMiddleware.verifyTokenOfAdmin,
     userController.delete,
 );
 
+router.get('/refreshToken', userController.refreshToken);
 router.get('/login', userController.login);
 router.post('/loginSuccessfully', userController.loginSuccessfully);
 router.get('/:slug', userController.show);
